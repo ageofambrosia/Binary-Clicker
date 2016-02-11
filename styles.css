@@ -1,0 +1,43 @@
+h1 {
+    color: #dddddd;
+    position: relative;
+    font-family: monospace, monospace;
+    font-size: 350%;
+    border-style: outset outset outset outset;
+    border-radius: 7px;
+    text-align: center;
+    letter-spacing: 15px;
+    border-color: #dddddd;
+    border-width: 5px;
+    top: 50px;
+    width: 400px;
+    margin: auto;
+}
+
+body {
+    background-color: #222222;
+}
+
+h2 {
+    color: #dddddd;
+    position: relative;
+    font-family: monospace, monospace;
+    font-size: 200%;
+    letter-spacing: 3px;
+    text-align: center;
+    top: 20px;
+}
+
+.button {
+    background-color: #dddddd;
+    border: none;
+    color: #222222;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 30px;
+    font-family: monospace, monospace;
+    letter-spacing: 3px;
+    border-radius: 5px;
+}
