@@ -12,7 +12,7 @@ var costRam1kB = 4;
 function updateByte() {
     "use strict";
     displayByte = byte.toFixed(0); //remove decimals (whats half a byte)
-    if (byte >= 1 && byte < 2) {
+    if (byte >= 0.5 && byte < 1.5) { //due to rounding from .toFixed()
         if (amtChip1Hz === 0) {
             document.getElementById("bytes").innerHTML = displayByte.toString().concat(" Byte"); //Displays 1 Byte
         } else {
