@@ -1,6 +1,7 @@
 var byte = 0.0;
 var displayByte = byte.toFixed(0); //remove decimals (whats half a byte)
 var clickValue = 1;
+var buyAmt = 1;
 
 var amtChip1Hz = 0;
 var costChip1Hz = 16;
@@ -10,6 +11,7 @@ var costRam1kB = 4;
 
 function updateByte() {
     "use strict";
+    displayByte = byte.toFixed(0); //remove decimals (whats half a byte)
     if (byte === 1) {
         document.getElementById("bytes").innerHTML = displayByte.toString().concat(" Byte"); //Displays 1 Byte
     } else {
@@ -27,10 +29,18 @@ function tick() {
     "use strict";
     byte += amtChip1Hz / 10; //divide 10 due to interval being 10 times faster
     updateByte();
-    displayByte = byte.toFixed(0); //remove decimals (whats half a byte)
 }
 
 var tickOnce = setInterval(tick, 100); //sets tick() interval
+
+/* doesn't work right now
+
+function getBuyAmt(num) {
+    "use strict";
+    buyAmt = num;
+}
+
+*/
 
 function buyChip1Hz(amt) {
     "use strict";
