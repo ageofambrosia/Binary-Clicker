@@ -13,19 +13,13 @@ function updateByte() {
     "use strict";
     displayByte = byte.toFixed(0); //remove decimals (whats half a byte)
     if (byte >= 0.5 && byte < 1.5) { //due to rounding from .toFixed()
-        if (amtChip1Hz === 0) {
-            document.getElementById("bytes").innerHTML = displayByte.toString().concat(" Byte"); //Displays 1 Byte
-        } else {
-            document.getElementById("bytes").innerHTML = displayByte.toString().concat(" Byte"); // Displays n Bytes
-            document.getElementById("bytes_per_second").innerHTML = " +".concat(amtChip1Hz, "/s");
-        }
+        document.getElementById("bytes").innerHTML = displayByte.toString().concat(" Byte"); //Displays 1 Byte
     } else {
-        if (amtChip1Hz === 0) {
-            document.getElementById("bytes").innerHTML = displayByte.toString().concat(" Bytes"); //Displays 1 Byte
-        } else {
-            document.getElementById("bytes").innerHTML = displayByte.toString().concat(" Bytes"); // Displays n Bytes
-            document.getElementById("bytes_per_second").innerHTML = " +".concat(amtChip1Hz, "/s");
-        }
+        document.getElementById("bytes").innerHTML = displayByte.toString().concat(" Bytes"); // Displays n Bytes
+    }
+    if (amtChip1Hz > 0) {
+        document.getElementById("bytes_per_second").innerHTML = " +".concat(amtChip1Hz.toString(), "/s");
+        document.getElementById("bytes_per_second").style.visibility = "visible";
     }
 }
 
