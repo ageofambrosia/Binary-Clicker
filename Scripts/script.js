@@ -49,6 +49,7 @@ function buyChip1Hz(amt) {
         amtChip1Hz += amt;
         costChip1Hz *= Math.pow(2, amt);
         document.getElementById("cost_one_hz_chip").innerHTML = "Cost: ".concat(costChip1Hz).toString(); //change displayed cost
+        document.getElementById("amount_one_hz_chip").innerHTML = amtChip1Hz;
     }
 }
 
@@ -60,5 +61,7 @@ function buyRam1kB(amt) {
         clickValue += amt;
         costRam1kB *= Math.pow(2, amt);
         document.getElementById("cost_one_kb_ram").innerHTML = "Cost: ".concat(costRam1kB).toString(); //change displayed cost
+        document.getElementById("amount_one_kb_ram").innerHTML = amtRam1kB;
+        document.getElementById("click_value").innerHTML = "Bytes+".concat(clickValue).toString();
     }
 }
