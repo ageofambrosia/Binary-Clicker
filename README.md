@@ -1,5 +1,4 @@
 # Binary-Clicker
-Binary Clicker
 
 Small project just for fun and games. Plus learning. That's important.
 
