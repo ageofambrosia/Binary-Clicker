@@ -12,10 +12,20 @@ var costRam1kB = 4;
 function updateByte() {
     "use strict";
     displayByte = byte.toFixed(0); //remove decimals (whats half a byte)
-    if (byte === 1) {
-        document.getElementById("bytes").innerHTML = displayByte.toString().concat(" Byte"); //Displays 1 Byte
+    if (byte >= 1 && byte < 2) {
+        if (amtChip1Hz === 0) {
+            document.getElementById("bytes").innerHTML = displayByte.toString().concat(" Byte"); //Displays 1 Byte
+        } else {
+            document.getElementById("bytes").innerHTML = displayByte.toString().concat(" Byte"); // Displays n Bytes
+            document.getElementById("bytes_per_second").innerHTML = " +".concat(amtChip1Hz, "/s");
+        }
     } else {
-        document.getElementById("bytes").innerHTML = displayByte.toString().concat(" Bytes"); // Displays n Bytes
+        if (amtChip1Hz === 0) {
+            document.getElementById("bytes").innerHTML = displayByte.toString().concat(" Bytes"); //Displays 1 Byte
+        } else {
+            document.getElementById("bytes").innerHTML = displayByte.toString().concat(" Bytes"); // Displays n Bytes
+            document.getElementById("bytes_per_second").innerHTML = " +".concat(amtChip1Hz, "/s");
+        }
     }
 }
 
@@ -32,15 +42,6 @@ function tick() {
 }
 
 var tickOnce = setInterval(tick, 100); //sets tick() interval
-
-/* doesn't work right now
-
-function getBuyAmt(num) {
-    "use strict";
-    buyAmt = num;
-}
-
-*/
 
 function buyChip1Hz(amt) {
     "use strict";

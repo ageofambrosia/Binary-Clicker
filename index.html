@@ -10,7 +10,7 @@
         <div class="resize">
             <h1>BINARY</h1>
             <br>
-            <h2 id="bytes">0 Bytes</h2>
+            <h2><span id=bytes>0 Bytes</span><span id="bytes_per_second"></span></h2>
             <br>
             <center><button onclick="addByte()" class="buttonClick"><b><span id="click_value">Byte++</span></b></button></center>
             <br>
@@ -24,7 +24,7 @@
             Current amount of 1Hz Chip: <span id="amount_one_hz_chip">0</span><br>
             Current amount of 1kB Ram: <span id="amount_one_kb_ram">0</span><br>
             
-            <!-- idk how this part works please help -->
+            <!-- idk how this part works in javascript please help -->
             Change purchase amount (Doesn't work right now): <input type="number" id="changeBuyAmt" value="1" min="1">
             <button onclick="getBuyAmt($('#changeBuyAmt').val())">Submit</button>
         </div>
