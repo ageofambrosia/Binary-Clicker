@@ -16,6 +16,8 @@ h1 {
 
 body {
     background-color: #222222;
+    margin: 0; /*needed for left and right align later*/
+    padding: 0;
 }
 
 h2 {
@@ -26,6 +28,16 @@ h2 {
     letter-spacing: 3px;
     text-align: center;
     top: 20px;
+}
+
+.left {
+    position: absolute;
+    left: 10%;
+}
+
+.right {
+    position: absolute;
+    right: 10%;
 }
 
 .buttonClick {
