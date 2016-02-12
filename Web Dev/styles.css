@@ -1,3 +1,7 @@
+.resize {
+    width: 100%;
+}
+
 h1 {
     color: #dddddd;
     position: relative;
@@ -31,13 +35,13 @@ h2 {
 }
 
 .left {
-    position: absolute;
-    left: 10%;
+    position: relative;
+    right: 40%;
 }
 
 .right {
-    position: absolute;
-    right: 10%;
+    position: relative;
+    left: 40%;
 }
 
 .buttonClick {
