@@ -11,9 +11,9 @@
             
             
             <ul class="topTabs">
-                <li class="active"><a href="index.html">Main</a></li>
-                <li><a href="stats.html">Stats</a></li>
-                <li><a href="settings.html">Settings</a></li>
+                <li class="active"><a href="#main">Main</a></li>
+                <li><a href="#stats">Stats</a></li>
+                <li><a href="#settings">Settings</a></li>
             </ul>
             
             
@@ -41,6 +41,21 @@
                     <br>
                 </div>
                 <!-- END MAIN TAB -->
+                
+                <div id="stats">
+                    <ul>
+                        <li><p class="amount">Current amount of 1Hz Chip: <span id="amount_one_hz_chip">0</span></p></li>
+                        <li><p class="amount">Current amount of 1kB Ram: <span id="amount_one_kb_ram">0</span></p></li>
+                    </ul>
+                </div>
+                
+                <div id="settings">
+                    <ul>
+                        <center><button onclick="save()" class="buttonClick">Save</button>
+                        <button onclick="load()" class="buttonClick">Load</button>
+                        <button onclick="delSave()" class="buttonClick">Delete Save</button></center>
+                    </ul>
+                </div>
                 
             </div>
             
