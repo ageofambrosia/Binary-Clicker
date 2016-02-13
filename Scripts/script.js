@@ -106,8 +106,8 @@ function buyRam1kB(amt) {
 function activeMain() {
     "use strict";
     document.getElementById("mainTab").style.backgroundColor = "#222222";
-    document.getElementById("statsTab").style.backgroundColor = "#dddddd";
-    document.getElementById("settingsTab").style.backgroundColor = "#dddddd";
+    document.getElementById("statsTab").style.backgroundColor = "transparent";
+    document.getElementById("settingsTab").style.backgroundColor = "transparent";
     document.getElementById("mainTab").style.color = "#dddddd";
     document.getElementById("statsTab").style.color = "#222222";
     document.getElementById("settingsTab").style.color = "#222222";
@@ -118,9 +118,9 @@ function activeMain() {
 
 function activeStats() {
     "use strict";
-    document.getElementById("mainTab").style.backgroundColor = "#dddddd";
+    document.getElementById("mainTab").style.backgroundColor = "transparent";
     document.getElementById("statsTab").style.backgroundColor = "#222222";
-    document.getElementById("settingsTab").style.backgroundColor = "#dddddd";
+    document.getElementById("settingsTab").style.backgroundColor = "transparent";
     document.getElementById("mainTab").style.color = "#222222";
     document.getElementById("statsTab").style.color = "#dddddd";
     document.getElementById("settingsTab").style.color = "#222222";
@@ -131,8 +131,8 @@ function activeStats() {
 
 function activeSettings() {
     "use strict";
-    document.getElementById("mainTab").style.backgroundColor = "#dddddd";
-    document.getElementById("statsTab").style.backgroundColor = "#dddddd";
+    document.getElementById("mainTab").style.backgroundColor = "transparent";
+    document.getElementById("statsTab").style.backgroundColor = "transparent";
     document.getElementById("settingsTab").style.backgroundColor = "#222222";
     document.getElementById("mainTab").style.color = "#222222";
     document.getElementById("statsTab").style.color = "#222222";
