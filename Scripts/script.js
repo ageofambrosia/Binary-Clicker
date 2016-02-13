@@ -80,7 +80,6 @@ function tick() {
     "use strict";
     byte += amtChip1Hz / 10; //divide 10 due to interval being 10 times faster
     updateByte();
-    save();
 }
 
 var tickOnce = setInterval(tick, 100); //sets tick() interval
@@ -174,6 +173,4 @@ function load() {
 function delSave() {
     "use strict";
     localStorage.removeItem("saveData");
-    window.location.reload();
-    load();
 }
