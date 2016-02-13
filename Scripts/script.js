@@ -35,18 +35,6 @@ function save() {
     localStorage.setItem("saveData", JSON.stringify(saveData));
 }
 
-function load() {
-    "use strict";
-    var loadData = JSON.parse(localStorage.getItem("saveData"));
-    if (typeof loadData.bytes !== "undefined") {byte = loadData.bytes; }
-    if (typeof loadData.clickValue !== "undefined") {clickValue = loadData.clickValue; }
-    if (typeof loadData.amtChip1Hz !== "undefined") {amtChip1Hz = loadData.amtChip1Hz; }
-    if (typeof loadData.costChip1Hz !== "undefined") {costChip1Hz = loadData.costChip1Hz; }
-    if (typeof loadData.amtRam1kB !== "undefined") {amtRam1kB = loadData.amtRam1kB; }
-    if (typeof loadData.costRam1kB !== "undefined") {costRam1kB = loadData.costRam1kB; }
-    fixDisplay();
-}
-
 function delSave() {
     "use strict";
     localStorage.removeItem("saveData");
@@ -113,4 +101,56 @@ function buyRam1kB(amt) {
         costRam1kB *= Math.pow(2, amt);
         fixDisplay();
     }
+}
+
+function activeMain() {
+    "use strict";
+    document.getElementById("mainTab").style.backgroundColor = "#222222";
+    document.getElementById("statsTab").style.backgroundColor = "#dddddd";
+    document.getElementById("settingsTab").style.backgroundColor = "#dddddd";
+    document.getElementById("mainTab").style.color = "#dddddd";
+    document.getElementById("statsTab").style.color = "#222222";
+    document.getElementById("settingsTab").style.color = "#222222";
+    document.getElementById("main").style.display = "block";
+    document.getElementById("stats").style.display = "none";
+    document.getElementById("settings").style.display = "none";
+}
+
+function activeStats() {
+    "use strict";
+    document.getElementById("mainTab").style.backgroundColor = "#dddddd";
+    document.getElementById("statsTab").style.backgroundColor = "#222222";
+    document.getElementById("settingsTab").style.backgroundColor = "#dddddd";
+    document.getElementById("mainTab").style.color = "#222222";
+    document.getElementById("statsTab").style.color = "#dddddd";
+    document.getElementById("settingsTab").style.color = "#222222";
+    document.getElementById("main").style.display = "none";
+    document.getElementById("stats").style.display = "block";
+    document.getElementById("settings").style.display = "none";
+}
+
+function activeSettings() {
+    "use strict";
+    document.getElementById("mainTab").style.backgroundColor = "#dddddd";
+    document.getElementById("statsTab").style.backgroundColor = "#dddddd";
+    document.getElementById("settingsTab").style.backgroundColor = "#222222";
+    document.getElementById("mainTab").style.color = "#222222";
+    document.getElementById("statsTab").style.color = "#222222";
+    document.getElementById("settingsTab").style.color = "#dddddd";
+    document.getElementById("main").style.display = "none";
+    document.getElementById("stats").style.display = "none";
+    document.getElementById("settings").style.display = "block";
+}
+
+function load() {
+    "use strict";
+    var loadData = JSON.parse(localStorage.getItem("saveData"));
+    if (typeof loadData.bytes !== "undefined") {byte = loadData.bytes; }
+    if (typeof loadData.clickValue !== "undefined") {clickValue = loadData.clickValue; }
+    if (typeof loadData.amtChip1Hz !== "undefined") {amtChip1Hz = loadData.amtChip1Hz; }
+    if (typeof loadData.costChip1Hz !== "undefined") {costChip1Hz = loadData.costChip1Hz; }
+    if (typeof loadData.amtRam1kB !== "undefined") {amtRam1kB = loadData.amtRam1kB; }
+    if (typeof loadData.costRam1kB !== "undefined") {costRam1kB = loadData.costRam1kB; }
+    fixDisplay();
+    activeMain();
 }
