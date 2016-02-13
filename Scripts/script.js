@@ -3,11 +3,13 @@ var displayByte = byte.toFixed(0); //remove decimals (whats half a byte)
 var clickValue = 1;
 var buyAmt = 1;
 
+var maxAmtChip1Hz = 16;
 var amtChip1Hz = 0;
 var costChip1Hz = 16;
 var amtChip4Hz = 0;
-var costChip4Hz = 1028;
+var costChip4Hz = 0; //temp
 
+var maxAmtRam1Kb = 4;
 var amtRam1kB = 0;
 var costRam1kB = 4;
 var amtRam2kB = 0;
@@ -44,6 +46,7 @@ function save() {
 function delSave() {
     "use strict";
     localStorage.removeItem("saveData");
+    window.location.reload();
 }
 
 function exportSave() {
@@ -100,7 +103,7 @@ function buyChip1Hz(amt) {
 
 function buyRam1kB(amt) {
     "use strict";
-    if (byte >= (costRam1kB * (Math.pow(2, amt) - 1)) && amtRam1kB < 3) {
+    if (byte >= (costRam1kB * (Math.pow(2, amt) - 1)) && amtRam1kB < (maxAmtRam1Kb - 1)) {
         byte -= (costRam1kB * (Math.pow(2, amt) - 1));
         amtRam1kB += amt;
         clickValue += amt;
@@ -113,7 +116,7 @@ function buyRam1kB(amt) {
         clickValue += 1;
         fixDisplay();
     }
-    if (byte >= (costRam2kB * (Math.pow(2, amt) - 1)) && amtRam1kB >= 4) {
+    if (byte >= (costRam2kB * (Math.pow(2, amt) - 1)) && amtRam1kB >= maxAmtRam1Kb) {
         byte -= (costRam2kB * (Math.pow(2, amt) - 1));
         amtRam2kB += amt;
         clickValue += 2 * amt;
