@@ -11,21 +11,17 @@ var costChip4Hz = 1028;
 var amtRam1kB = 0;
 var costRam1kB = 4;
 var amtRam2kB = 0;
-var costRam2kB = 32;
+var costRam2kB = 128;
 
 function fixDisplay() {
     "use strict";
-    document.getElementById("cost_one_hz_chip").innerHTML = "Cost: ".concat(costChip1Hz).toString(); //change displayed cost
-    document.getElementById("amount_one_hz_chip").innerHTML = amtChip1Hz;
-    document.getElementById("cost_one_kb_ram").innerHTML = "Cost: ".concat(costRam1kB).toString(); //change displayed cost
-    document.getElementById("amount_one_kb_ram").innerHTML = amtRam1kB;
-    if (amtChip4Hz >= 1) {
-        $("type_chip").html = "4Hz";
-        $("cost_one_hz_chip").html = "Cost: ".concat(costChip4Hz).toString();
-    }
-    if (amtRam2kB >= 1) {
-        $("type_ram").html = "2Kb";
-        $("cost_one_kb_ram").html = "Cost: ".concat(costRam2kB).toString();
+    document.getElementById("cost_chip").innerHTML = costChip1Hz; //change displayed cost
+    document.getElementById("amount_chip").innerHTML = amtChip1Hz;
+    document.getElementById("cost_ram").innerHTML = costRam1kB; //change displayed cost
+    document.getElementById("amount_ram").innerHTML = amtRam1kB;
+    if (amtRam1kB === 4) {
+        document.getElementById("type_ram").innerHTML = "2kB";
+        document.getElementById("cost_ram").innerHTML = costRam2kB;
     }
     if (clickValue !== 1) {
         document.getElementById("click_value").innerHTML = "Bytes+".concat(clickValue).toString();
@@ -54,12 +50,12 @@ function exportSave() {
     "use strict";
     save();
     var saveText = window.btoa(JSON.stringify(localStorage.getitem("saveData")));
-    // add the html section here
+    // add the innerHTML section here
 }
 
 function importSave() {
     "use strict";
-    // html prompt for info
+    // innerHTML prompt for info
     var loadText = window.atob(JSON.parse(localStorage.getItem("saveData")));
 }
 
@@ -100,24 +96,24 @@ function buyChip1Hz(amt) {
         costChip1Hz *= Math.pow(2, amt);
         fixDisplay();
     }
-    if (byte >= (costChip4Hz * (Math.pow(2, amt) - 1)) && amtChip1Hz >= 16) {
-        byte -= (costChip4Hz * (Math.pow(2, amt) - 1));
-        amtChip4Hz += amt;
-        costChip4Hz *= Math.pow(2, amt);
-        fixDisplay();
-    }
 }
 
 function buyRam1kB(amt) {
     "use strict";
-    if (byte >= (costRam1kB * (Math.pow(2, amt) - 1)) && amtRam1kB <= 3) {
+    if (byte >= (costRam1kB * (Math.pow(2, amt) - 1)) && amtRam1kB < 3) {
         byte -= (costRam1kB * (Math.pow(2, amt) - 1));
         amtRam1kB += amt;
         clickValue += amt;
         costRam1kB *= Math.pow(2, amt);
         fixDisplay();
     }
-    if (byte >= (costRam2kB * (Math.pow(2, amt) - 1)) && amtRam2kB >= 4) {
+    if (byte >= costRam1kB && amtRam1kB === 3) {
+        byte -= costRam1kB;
+        amtRam1kB += 1;
+        clickValue += 1;
+        fixDisplay();
+    }
+    if (byte >= (costRam2kB * (Math.pow(2, amt) - 1)) && amtRam1kB >= 4) {
         byte -= (costRam2kB * (Math.pow(2, amt) - 1));
         amtRam2kB += amt;
         clickValue += 2 * amt;
@@ -125,8 +121,6 @@ function buyRam1kB(amt) {
         fixDisplay();
     }
 }
-
-
 
 function activeMain() {
     "use strict";
