@@ -3,9 +3,11 @@ var displayByte = byte.toFixed(0); //remove decimals (whats half a byte)
 var clickValue = 1;
 var buyAmt = 1;
 
+var maxChipAmt = 9999999999999999; //temporary no limit
 var amtChip1Hz = 0;
 var costChip1Hz = 16;
 
+var maxRamAmt = 9999999999999999; //temporary no limit
 var amtRam1kB = 0;
 var costRam1kB = 4;
 
@@ -50,6 +52,19 @@ function delSave() {
     localStorage.removeItem("saveData");
 }
 
+function exportSave() {
+    "use strict";
+    save();
+    var saveText = window.btoa(JSON.stringify(localStorage.getitem("saveData")));
+    // add the html section here
+}
+
+function importSave() {
+    "use strict";
+    // html prompt for info
+    var loadText = window.atob(JSON.parse(localStorage.getItem("saveData")));
+}
+
 function updateByte() {
     "use strict";
     displayByte = byte.toFixed(0); //remove decimals (whats half a byte)
@@ -74,13 +89,14 @@ function tick() {
     "use strict";
     byte += amtChip1Hz / 10; //divide 10 due to interval being 10 times faster
     updateByte();
+    save();
 }
 
 var tickOnce = setInterval(tick, 100); //sets tick() interval
 
 function buyChip1Hz(amt) {
     "use strict";
-    if (byte >= (costChip1Hz * (Math.pow(2, amt) - 1))) {
+    if (byte >= (costChip1Hz * (Math.pow(2, amt) - 1)) && amtChip1Hz <= maxChipAmt) {
         byte -= (costChip1Hz * (Math.pow(2, amt) - 1));
         amtChip1Hz += amt;
         costChip1Hz *= Math.pow(2, amt);
@@ -90,7 +106,7 @@ function buyChip1Hz(amt) {
 
 function buyRam1kB(amt) {
     "use strict";
-    if (byte >= (costRam1kB * (Math.pow(2, amt) - 1))) {
+    if (byte >= (costRam1kB * (Math.pow(2, amt) - 1)) && amtRam1kB <= maxRamAmt) {
         byte -= (costRam1kB * (Math.pow(2, amt) - 1));
         amtRam1kB += amt;
         clickValue += amt;
