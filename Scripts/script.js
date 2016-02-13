@@ -43,13 +43,6 @@ function save() {
     localStorage.setItem("saveData", JSON.stringify(saveData));
 }
 
-function delSave() {
-    "use strict";
-    localStorage.removeItem("saveData");
-    window.location.reload();
-    load();
-}
-
 function exportSave() {
     "use strict";
     save();
@@ -176,4 +169,11 @@ function load() {
     if (typeof loadData.costRam1kB !== "undefined") {costRam1kB = loadData.costRam1kB; }
     fixDisplay();
     activeMain();
+}
+
+function delSave() {
+    "use strict";
+    localStorage.removeItem("saveData");
+    window.location.reload();
+    load();
 }
