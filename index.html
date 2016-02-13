@@ -37,18 +37,17 @@
                             <td class=right><button onclick="buyRam1kB(buyAmt)" class="buttonBuyRam1kB">1kB Ram|<span id="cost_one_kb_ram">Cost: 4</span></button></td>
                         </tr>
                     </table></center><br>
- 
-                    <!-- idk how this part works in javascript please help -->
-                    Change purchase amount (Doesn't work right now): <input type="number" id="changeBuyAmt" value="1" min="1">
-                    <button onclick="getBuyAmt($('#changeBuyAmt').val())">Submit</button>
-                    <br>
                 </div>
                 <!-- END MAIN TAB -->
                 
                 <div id="stats" class="statsTabContent">
+                    <h1>Inventory</h1>
+                    <br>
                     <ul>
-                        <li><p class="amount">Current amount of 1Hz Chip: <span id="amount_one_hz_chip">0</span></p></li>
-                        <li><p class="amount">Current amount of 1kB Ram: <span id="amount_one_kb_ram">0</span></p></li>
+                        <center><div>
+                            <li><p>Current amount of 1Hz Chip: <span id="amount_one_hz_chip">0</span></p></li>
+                            <li><p>Current amount of 1kB Ram: <span id="amount_one_kb_ram">0</span></p></li>
+                        </div></center>
                     </ul>
                 </div>
                 
