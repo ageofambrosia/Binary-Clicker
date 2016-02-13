@@ -3,13 +3,15 @@ var displayByte = byte.toFixed(0); //remove decimals (whats half a byte)
 var clickValue = 1;
 var buyAmt = 1;
 
-var maxChipAmt = 9999999999999999; //temporary no limit
 var amtChip1Hz = 0;
 var costChip1Hz = 16;
+var amtChip4Hz = 0;
+var costChip4Hz = 1028;
 
-var maxRamAmt = 9999999999999999; //temporary no limit
 var amtRam1kB = 0;
 var costRam1kB = 4;
+var amtRam2kB = 0;
+var costRam2kB = 32;
 
 function fixDisplay() {
     "use strict";
@@ -17,6 +19,14 @@ function fixDisplay() {
     document.getElementById("amount_one_hz_chip").innerHTML = amtChip1Hz;
     document.getElementById("cost_one_kb_ram").innerHTML = "Cost: ".concat(costRam1kB).toString(); //change displayed cost
     document.getElementById("amount_one_kb_ram").innerHTML = amtRam1kB;
+    if (amtChip4Hz >= 1) {
+        $("type_chip").html = "4Hz";
+        $("cost_one_hz_chip").html = "Cost: ".concat(costChip4Hz).toString();
+    }
+    if (amtRam2kB >= 1) {
+        $("type_ram").html = "2Kb";
+        $("cost_one_kb_ram").html = "Cost: ".concat(costRam2kB).toString();
+    }
     if (clickValue !== 1) {
         document.getElementById("click_value").innerHTML = "Bytes+".concat(clickValue).toString();
     }
@@ -84,24 +94,39 @@ var tickOnce = setInterval(tick, 100); //sets tick() interval
 
 function buyChip1Hz(amt) {
     "use strict";
-    if (byte >= (costChip1Hz * (Math.pow(2, amt) - 1)) && amtChip1Hz <= maxChipAmt) {
+    if (byte >= (costChip1Hz * (Math.pow(2, amt) - 1)) && amtChip1Hz <= 15) {
         byte -= (costChip1Hz * (Math.pow(2, amt) - 1));
         amtChip1Hz += amt;
         costChip1Hz *= Math.pow(2, amt);
+        fixDisplay();
+    }
+    if (byte >= (costChip4Hz * (Math.pow(2, amt) - 1)) && amtChip1Hz >= 16) {
+        byte -= (costChip4Hz * (Math.pow(2, amt) - 1));
+        amtChip4Hz += amt;
+        costChip4Hz *= Math.pow(2, amt);
         fixDisplay();
     }
 }
 
 function buyRam1kB(amt) {
     "use strict";
-    if (byte >= (costRam1kB * (Math.pow(2, amt) - 1)) && amtRam1kB <= maxRamAmt) {
+    if (byte >= (costRam1kB * (Math.pow(2, amt) - 1)) && amtRam1kB <= 3) {
         byte -= (costRam1kB * (Math.pow(2, amt) - 1));
         amtRam1kB += amt;
         clickValue += amt;
         costRam1kB *= Math.pow(2, amt);
         fixDisplay();
     }
+    if (byte >= (costRam2kB * (Math.pow(2, amt) - 1)) && amtRam2kB >= 4) {
+        byte -= (costRam2kB * (Math.pow(2, amt) - 1));
+        amtRam2kB += amt;
+        clickValue += 2 * amt;
+        costRam2kB *= Math.pow(2, amt);
+        fixDisplay();
+    }
 }
+
+
 
 function activeMain() {
     "use strict";
