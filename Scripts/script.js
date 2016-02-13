@@ -47,6 +47,7 @@ function delSave() {
     "use strict";
     localStorage.removeItem("saveData");
     window.location.reload();
+    load();
 }
 
 function exportSave() {
