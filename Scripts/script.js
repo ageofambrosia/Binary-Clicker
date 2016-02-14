@@ -37,8 +37,12 @@ function save() {
         clickValue: clickValue,
         amtChip1Hz: amtChip1Hz,
         costChip1Hz: costChip1Hz,
+        amtChip4Hz: amtChip4Hz,
+        costChip4Hz: costChip4Hz,
         amtRam1kB: amtRam1kB,
-        costRam1kB: costRam1kB
+        costRam1kB: costRam1kB,
+        amtRamk2kB: amtRam2kB,
+        costRam2kB: costRam2kB
     };
     localStorage.setItem("saveData", JSON.stringify(saveData));
 }
@@ -164,8 +168,12 @@ function load() {
     if (typeof loadData.clickValue !== "undefined") {clickValue = loadData.clickValue; }
     if (typeof loadData.amtChip1Hz !== "undefined") {amtChip1Hz = loadData.amtChip1Hz; }
     if (typeof loadData.costChip1Hz !== "undefined") {costChip1Hz = loadData.costChip1Hz; }
+    if (typeof loadData.amtChip4Hz !== "undefined") {amtChip4Hz = loadData.amtChip4Hz; }
+    if (typeof loadData.costChip4Hz !== "undefined") {costChip4Hz = loadData.costChip4Hz; }
     if (typeof loadData.amtRam1kB !== "undefined") {amtRam1kB = loadData.amtRam1kB; }
     if (typeof loadData.costRam1kB !== "undefined") {costRam1kB = loadData.costRam1kB; }
+    if (typeof loadData.amtRam2kB !== "undefined") {amtRam2kB = loadData.amtRamk2kB; }
+    if (typeof loadData.costRam2kB !== "undefined") {costChip1Hz = loadData.costRam2kB; }
     fixDisplay();
     activeMain();
 }
