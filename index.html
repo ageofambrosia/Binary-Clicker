@@ -14,7 +14,7 @@
             
             <ul class="topTabs">
                 <li><a href="#main" onclick="activeMain()" id="mainTab">Main</a></li>
-                <!--<li><a href="#store" onclick="activeStore()">Store</a></li>-->
+                <li><a href="#storage" onclick="activeStorage()" id="storageTab">Storage</a></li>
                 <li><a href="#stats" onclick="activeStats()" id="statsTab">Stats</a></li>
                 <li><a href="#settings" onclick="activeSettings()" id="settingsTab">Settings</a></li>
             </ul>
@@ -31,17 +31,17 @@
 
                     <center><table>
                         <tr>
-                            <td class=left><button onclick="buyChip1Hz(buyAmt)" class="buttonBuyChip1Hz"><span id="type_chip">1Hz</span> Chip|Cost: <span id="cost_chip">16</span></button></td>
+                            <td class=left><button onclick="buyChip1Hz(1)" class="buttonBuyChip1Hz"><span id="type_chip">1Hz</span> Chip|Cost: <span id="cost_chip">16</span></button></td>
 
-                            <td class=right><button onclick="buyRam1kB(buyAmt)" class="buttonBuyRam1kB"><span id="type_ram">1kB</span> Ram|Cost: <span id="cost_ram">4</span></button></td>
+                            <td class=right><button onclick="buyRam1kB(1)" class="buttonBuyRam1kB"><span id="type_ram">1kB</span> Ram|Cost: <span id="cost_ram">4</span></button></td>
                         </tr>
                     </table></center><br>
                 </div>
                 <!-- END MAIN TAB -->
-                <!--
-                <div id="store" class="storeTabContent">
-                    <h1>Store</h1>
-                </div>-->
+                
+                <div id="storage" class="storageTabContent">
+                    
+                </div>
                 
                 <div id="stats" class="statsTabContent">
                     <h1>Inventory</h1>
