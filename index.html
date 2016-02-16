@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html onload="load()">
+<html>
     <head>
         <link rel="stylesheet" type="text/css" href="styles.css">
         
@@ -9,17 +9,15 @@
         <title>Binary Clicker</title>
     </head>
     
-    <body>
+    <body onload="load()">
         <div class="resize">
-            
             
             <ul class="topTabs">
                 <li><a href="#main" onclick="activeMain()" id="mainTab">Main</a></li>
-                <li><a href="#store" onclick="activeStore()">Store</a></li>
+                <!--<li><a href="#store" onclick="activeStore()">Store</a></li>-->
                 <li><a href="#stats" onclick="activeStats()" id="statsTab">Stats</a></li>
                 <li><a href="#settings" onclick="activeSettings()" id="settingsTab">Settings</a></li>
             </ul>
-            
             
             <div class="tabs">
                 
@@ -40,10 +38,10 @@
                     </table></center><br>
                 </div>
                 <!-- END MAIN TAB -->
-                
+                <!--
                 <div id="store" class="storeTabContent">
                     <h1>Store</h1>
-                </div>
+                </div>-->
                 
                 <div id="stats" class="statsTabContent">
                     <h1>Inventory</h1>
