@@ -1,7 +1,10 @@
 var byte = 0.0;
+var kilobytes = 0.0;
+var megabytes = 0.0;
+var gigabytes = 0.0;
+var currentStorage = 1024 * 1024;
 var displayByte = byte.toFixed(0); //remove decimals (whats half a byte)
 var clickValue = 1;
-var buyAmt = 1;
 
 var maxAmtChip1Hz = 16;
 var amtChip1Hz = 0;
@@ -14,6 +17,10 @@ var amtRam1kB = 0;
 var costRam1kB = 4;
 var amtRam2kB = 0;
 var costRam2kB = 128;
+
+
+//MESS OF FUNCTIONS
+
 
 function fixDisplay() {
     "use strict";
@@ -30,44 +37,35 @@ function fixDisplay() {
     }
 }
 
-function save() {
-    "use strict";
-    var saveData = {
-        bytes: byte,
-        clickValue: clickValue,
-        amtChip1Hz: amtChip1Hz,
-        costChip1Hz: costChip1Hz,
-        amtChip4Hz: amtChip4Hz,
-        costChip4Hz: costChip4Hz,
-        amtRam1kB: amtRam1kB,
-        costRam1kB: costRam1kB,
-        amtRamk2kB: amtRam2kB,
-        costRam2kB: costRam2kB
-    };
-    localStorage.setItem("saveData", JSON.stringify(saveData));
-}
 
-function exportSave() {
+function byteSuffix() {
     "use strict";
-    save();
-    var saveText = window.btoa(JSON.stringify(localStorage.getitem("saveData")));
-    // add the innerHTML section here
-}
-
-function importSave() {
-    "use strict";
-    // innerHTML prompt for info
-    var loadText = window.atob(JSON.parse(localStorage.getItem("saveData")));
+    if (megabytes >= 10240) {
+        //GIGABYTES//
+        gigabytes = (kilobytes / 1024).toFixed(3);
+        document.getElementById("bytes").innerHTML = gigabytes.toString().concat(" gigabytes"); //Displays GigaBytes
+    } else if (kilobytes >= 10240) {
+        //MEGABYTES//
+        megabytes = (kilobytes / 1024).toFixed(3);
+        document.getElementById("bytes").innerHTML = megabytes.toString().concat(" megabytes"); //Displays MegaBytes
+    } else if (byte >= 10240) {
+        //KILOBYTES//
+        kilobytes = (byte / 1024).toFixed(3);
+        document.getElementById("bytes").innerHTML = kilobytes.toString().concat(" kilobytes"); //Displays KiloBytes
+    } else {
+        //BYTES//
+        displayByte = byte.toFixed(0); //remove decimals (whats half a byte)
+        if (byte >= 0.5 && byte < 1.5) { //due to rounding from .toFixed()
+            document.getElementById("bytes").innerHTML = displayByte.toString().concat(" Byte"); //Displays 1 Byte
+        } else {
+            document.getElementById("bytes").innerHTML = displayByte.toString().concat(" Bytes"); // Displays n Bytes
+        }
+    }
 }
 
 function updateByte() {
     "use strict";
-    displayByte = byte.toFixed(0); //remove decimals (whats half a byte)
-    if (byte >= 0.5 && byte < 1.5) { //due to rounding from .toFixed()
-        document.getElementById("bytes").innerHTML = displayByte.toString().concat(" Byte"); //Displays 1 Byte
-    } else {
-        document.getElementById("bytes").innerHTML = displayByte.toString().concat(" Bytes"); // Displays n Bytes
-    }
+    byteSuffix();
     if (amtChip1Hz > 0) {
         document.getElementById("bytes_per_second").innerHTML = " +".concat(amtChip1Hz.toString(), "/s");
         document.getElementById("bytes_per_second").style.visibility = "visible";
@@ -79,14 +77,6 @@ function addByte() {
     byte += clickValue;
     updateByte();
 }
-
-function tick() {
-    "use strict";
-    byte += amtChip1Hz / 10; //divide 10 due to interval being 10 times faster
-    updateByte();
-}
-
-var tickOnce = setInterval(tick, 100); //sets tick() interval
 
 function buyChip1Hz(amt) {
     "use strict";
@@ -122,17 +112,47 @@ function buyRam1kB(amt) {
     }
 }
 
+
+
+
+//END MESS OF FUNCTIONS
+
+
+
+//LOOP
+
+
+function tick() {
+    "use strict";
+    byte += amtChip1Hz / 10; //divide 10 due to interval being 10 times faster
+    updateByte();
+}
+
+var tickOnce = setInterval(tick, 100); //sets tick() interval
+
+//END LOOP
+
+
+
+
+
+//BEN'S TABS DO NOT TOUCH!
+
+
 function activeMain() {
     "use strict";
     document.getElementById("mainTab").style.backgroundColor = "#222222";
     document.getElementById("statsTab").style.backgroundColor = "transparent";
     document.getElementById("settingsTab").style.backgroundColor = "transparent";
+    document.getElementById("storageTab").style.backgroundColor = "transparent";
     document.getElementById("mainTab").style.color = "#dddddd";
     document.getElementById("statsTab").style.color = "#222222";
     document.getElementById("settingsTab").style.color = "#222222";
+    document.getElementById("storageTab").style.color = "#222222";
     document.getElementById("main").style.display = "block";
     document.getElementById("stats").style.display = "none";
     document.getElementById("settings").style.display = "none";
+    document.getElementById("storage").style.display = "none";
 }
 
 function activeStats() {
@@ -140,12 +160,15 @@ function activeStats() {
     document.getElementById("mainTab").style.backgroundColor = "transparent";
     document.getElementById("statsTab").style.backgroundColor = "#222222";
     document.getElementById("settingsTab").style.backgroundColor = "transparent";
+    document.getElementById("storageTab").style.backgroundColor = "transparent";
     document.getElementById("mainTab").style.color = "#222222";
     document.getElementById("statsTab").style.color = "#dddddd";
     document.getElementById("settingsTab").style.color = "#222222";
+    document.getElementById("storageTab").style.color = "#222222";
     document.getElementById("main").style.display = "none";
     document.getElementById("stats").style.display = "block";
     document.getElementById("settings").style.display = "none";
+    document.getElementById("storage").style.display = "none";
 }
 
 function activeSettings() {
@@ -153,12 +176,69 @@ function activeSettings() {
     document.getElementById("mainTab").style.backgroundColor = "transparent";
     document.getElementById("statsTab").style.backgroundColor = "transparent";
     document.getElementById("settingsTab").style.backgroundColor = "#222222";
+    document.getElementById("storageTab").style.backgroundColor = "transparent";
     document.getElementById("mainTab").style.color = "#222222";
     document.getElementById("statsTab").style.color = "#222222";
     document.getElementById("settingsTab").style.color = "#dddddd";
+    document.getElementById("storageTab").style.color = "#222222";
     document.getElementById("main").style.display = "none";
     document.getElementById("stats").style.display = "none";
     document.getElementById("settings").style.display = "block";
+    document.getElementById("storage").style.display = "none";
+}
+
+function activeStorage() {
+    "use strict";
+    document.getElementById("mainTab").style.backgroundColor = "transparent";
+    document.getElementById("statsTab").style.backgroundColor = "transparent";
+    document.getElementById("settingsTab").style.backgroundColor = "transparent";
+    document.getElementById("storageTab").style.backgroundColor = "#222222";
+    document.getElementById("mainTab").style.color = "#222222";
+    document.getElementById("statsTab").style.color = "#222222";
+    document.getElementById("settingsTab").style.color = "#222222";
+    document.getElementById("storageTab").style.color = "#dddddd";
+    document.getElementById("main").style.display = "none";
+    document.getElementById("stats").style.display = "none";
+    document.getElementById("settings").style.display = "none";
+    document.getElementById("storage").style.display = "block";
+}
+
+
+
+//END BEN'S TABS!
+
+
+
+//SAVING AREA
+
+function save() {
+    "use strict";
+    var saveData = {
+        bytes: byte,
+        clickValue: clickValue,
+        amtChip1Hz: amtChip1Hz,
+        costChip1Hz: costChip1Hz,
+        amtChip4Hz: amtChip4Hz,
+        costChip4Hz: costChip4Hz,
+        amtRam1kB: amtRam1kB,
+        costRam1kB: costRam1kB,
+        amtRamk2kB: amtRam2kB,
+        costRam2kB: costRam2kB
+    };
+    localStorage.setItem("saveData", JSON.stringify(saveData));
+}
+
+function exportSave() {
+    "use strict";
+    save();
+    var saveText = window.btoa(JSON.stringify(localStorage.getitem("saveData")));
+    // add the innerHTML section here
+}
+
+function importSave() {
+    "use strict";
+    // innerHTML prompt for info
+    var loadText = window.atob(JSON.parse(localStorage.getItem("saveData")));
 }
 
 function load() {
@@ -182,3 +262,6 @@ function delSave() {
     "use strict";
     localStorage.removeItem("saveData");
 }
+
+
+//END SAVING AREA
