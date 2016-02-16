@@ -18,6 +18,8 @@ var costRam1kB = 4;
 var amtRam2kB = 0;
 var costRam2kB = 128;
 
+var isBroken = 0;
+
 
 //MESS OF FUNCTIONS
 
@@ -228,6 +230,8 @@ function save() {
     localStorage.setItem("saveData", JSON.stringify(saveData));
 }
 
+setInterval(save, 10000);
+
 function exportSave() {
     "use strict";
     save();
@@ -263,5 +267,14 @@ function delSave() {
     localStorage.removeItem("saveData");
 }
 
+function benGhettoSolution() {
+    "use strict";
+    if (isBroken === 0) {
+        isBroken = 1;
+        activeMain();
+    }        
+}
+
+setInterval(benGhettoSolution, 50);
 
 //END SAVING AREA
