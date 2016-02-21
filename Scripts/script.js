@@ -2,7 +2,7 @@ var byte = 0.0;
 var kilobytes = 0.0;
 var megabytes = 0.0;
 var gigabytes = 0.0;
-var currentStorage = 1024 * 1024;
+var maxStorage = 1024 * 1024;
 var displayByte = byte.toFixed(0); //remove decimals (whats half a byte)
 var clickValue = 1;
 
@@ -44,7 +44,7 @@ function byteSuffix() {
     "use strict";
     if (megabytes >= 10240) {
         //GIGABYTES//
-        gigabytes = (kilobytes / 1024).toFixed(3);
+        gigabytes = (megabytes / 1024).toFixed(3);
         document.getElementById("bytes").innerHTML = gigabytes.toString().concat(" gigabytes"); //Displays GigaBytes
     } else if (kilobytes >= 10240) {
         //MEGABYTES//
@@ -68,6 +68,9 @@ function byteSuffix() {
 function updateByte() {
     "use strict";
     byteSuffix();
+    kilobytes = byte / 1024;
+    megabytes = kilobytes / 1024;
+    gigabytes = megabytes / 1024;
     if (amtChip1Hz > 0) {
         document.getElementById("bytes_per_second").innerHTML = " +".concat(amtChip1Hz.toString(), "/s");
         document.getElementById("bytes_per_second").style.visibility = "visible";
@@ -76,8 +79,12 @@ function updateByte() {
 
 function addByte() {
     "use strict";
-    byte += clickValue;
-    updateByte();
+    if (byte < maxStorage) {
+        byte += clickValue;
+        updateByte();
+    } else {
+        byte = maxStorage;
+    }
 }
 
 function buyChip1Hz(amt) {
@@ -115,8 +122,6 @@ function buyRam1kB(amt) {
 }
 
 
-
-
 //END MESS OF FUNCTIONS
 
 
@@ -126,8 +131,12 @@ function buyRam1kB(amt) {
 
 function tick() {
     "use strict";
-    byte += amtChip1Hz / 10; //divide 10 due to interval being 10 times faster
-    updateByte();
+    if (byte < maxStorage) {
+        byte += amtChip1Hz / 10; //divide 10 due to interval being 10 times faster
+        updateByte();
+    } else {
+        byte = maxStorage;
+    }
 }
 
 var tickOnce = setInterval(tick, 100); //sets tick() interval
@@ -224,7 +233,7 @@ function save() {
         costChip4Hz: costChip4Hz,
         amtRam1kB: amtRam1kB,
         costRam1kB: costRam1kB,
-        amtRamk2kB: amtRam2kB,
+        amtRam2kB: amtRam2kB,
         costRam2kB: costRam2kB
     };
     localStorage.setItem("saveData", JSON.stringify(saveData));
@@ -257,7 +266,7 @@ function load() {
     if (typeof loadData.amtRam1kB !== "undefined") {amtRam1kB = loadData.amtRam1kB; }
     if (typeof loadData.costRam1kB !== "undefined") {costRam1kB = loadData.costRam1kB; }
     if (typeof loadData.amtRam2kB !== "undefined") {amtRam2kB = loadData.amtRamk2kB; }
-    if (typeof loadData.costRam2kB !== "undefined") {costChip1Hz = loadData.costRam2kB; }
+    if (typeof loadData.costRam2kB !== "undefined") {costRam2kB = loadData.costRam2kB; }
     fixDisplay();
     activeMain();
 }
@@ -272,7 +281,7 @@ function benGhettoSolution() {
     if (isBroken === 0) {
         isBroken = 1;
         activeMain();
-    }        
+    }
 }
 
 setInterval(benGhettoSolution, 50);
